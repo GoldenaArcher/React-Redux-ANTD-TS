@@ -19,16 +19,16 @@ const Navigation = () => {
 
   return (
     <Menu mode="horizontal" selectable={false}>
-      <Menu.Item className={isHome}>
+      <Menu.Item className={isHome} key="home">
         <Link to="/">首页</Link>
       </Menu.Item>
-      <Menu.Item className={isShop}>
+      <Menu.Item className={isShop} key="shop">
         <Link to="/shop">商城</Link>
       </Menu.Item>
-      <Menu.Item className={isSignin}>
+      <Menu.Item className={isSignin} key="signin">
         <Link to="/signin">登录</Link>
       </Menu.Item>
-      <Menu.Item className={isSignup}>
+      <Menu.Item className={isSignup} key="signup">
         <Link to="/signup">注册</Link>
       </Menu.Item>
     </Menu>
