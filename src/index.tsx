@@ -4,6 +4,7 @@ import { Provider } from "react-redux";
 import { API } from "./config";
 import Routes from "./Routes";
 import store, { history } from "./store";
+import "./style.css";
 
 console.log(API);
 

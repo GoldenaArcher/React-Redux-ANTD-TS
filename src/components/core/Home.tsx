@@ -5,7 +5,11 @@ import { useSelector } from "react-redux";
 const Home = () => {
   const state = useSelector((state) => state);
 
-  return <Layout>{JSON.stringify(state)}</Layout>;
+  return (
+    <Layout title="商城首页" subTitle={""}>
+      {JSON.stringify(state)}
+    </Layout>
+  );
 };
 
 export default Home;
