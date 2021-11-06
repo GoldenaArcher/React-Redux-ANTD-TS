@@ -17,7 +17,7 @@ const Layout: FC<Props> = ({ children, title, subTitle }) => {
         title={title}
         subTitle={subTitle || "GoldenaArcher的学习项目"}
       />
-      {children}
+      <div style={{ width: "85%", margin: "0 auto" }}>{children}</div>
     </div>
   );
 };
