@@ -49,8 +49,50 @@ export const resetSignup = () => ({
   type: SIGNUP_RESET,
 });
 
+// 登录
+
+export const SIGNIN = "SIGNIN";
+export const SIGNIN_SUCESS = "SIGNIN_SUCESS";
+export const SIGNIN_FAIL = "SIGNIN_FAIL";
+
+export interface SigninPayload {
+  email: string;
+  password: string;
+}
+
+export interface SigninAction {
+  type: typeof SIGNIN;
+  payload: SigninPayload;
+}
+
+export interface SigninSuccessAction {
+  type: typeof SIGNIN_SUCESS;
+}
+
+export interface SigninFailAction {
+  type: typeof SIGNIN_FAIL;
+  message: string;
+}
+
+export const signin = (payload: SigninPayload): SigninAction => ({
+  type: SIGNIN,
+  payload,
+});
+
+export const signinSuccess = (): SigninSuccessAction => ({
+  type: SIGNIN_SUCESS,
+});
+
+export const signinFail = (message: string): SigninFailAction => ({
+  type: SIGNIN_FAIL,
+  message,
+});
+
 export type AuthUnionType =
   | SignupAction
   | SignupSuccessAction
   | SignupFailAction
-  | SignupResetAction;
+  | SignupResetAction
+  | SigninAction
+  | SigninFailAction
+  | SigninSuccessAction;
