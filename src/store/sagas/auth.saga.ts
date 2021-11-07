@@ -18,7 +18,5 @@ function* handleSignup(action: SignupAction) {
 }
 
 export default function* authSaga() {
-  console.log("auth saga");
-
   yield takeEvery(SIGNUP, handleSignup);
 }

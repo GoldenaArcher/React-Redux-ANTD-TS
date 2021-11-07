@@ -16,6 +16,7 @@ const store = createStore(
   applyMiddleware(routerMiddleware(history), logger, sagaMiddleware)
 );
 
+// execute the saga middleware
 sagaMiddleware.run(rootSaga);
 
 export default store;

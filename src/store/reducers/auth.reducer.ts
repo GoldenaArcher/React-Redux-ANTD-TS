@@ -9,6 +9,7 @@ export interface AuthState {
   signup: {
     loaded: boolean;
     success: boolean;
+    message: string;
   };
 }
 
@@ -16,6 +17,7 @@ const initialState: AuthState = {
   signup: {
     loaded: false,
     success: false,
+    message: "",
   },
 };
 
