@@ -1,11 +1,15 @@
 import { Button, Form, Input } from "antd";
 import React from "react";
-import { SignupPayload } from "../../store/actions/auth.actions";
+import { useDispatch } from "react-redux";
+import { signup, SignupPayload } from "../../store/actions/auth.actions";
 import Layout from "./Layout";
 
 const Signup = () => {
+  const dispatch = useDispatch();
+
   const onFinish = (value: SignupPayload) => {
     console.log(value);
+    dispatch(signup(value));
   };
 
   return (
@@ -20,11 +24,9 @@ const Signup = () => {
         <Form.Item name="email" label="邮箱">
           <Input />
         </Form.Item>
-        <Form.Item name="注册">
-          <Button type="primary" htmlType="submit">
-            注册
-          </Button>
-        </Form.Item>
+        <Button type="primary" htmlType="submit">
+          注册
+        </Button>
       </Form>
     </Layout>
   );
