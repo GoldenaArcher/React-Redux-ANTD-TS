@@ -24,10 +24,12 @@ export interface SignupFailAction {
 }
 
 // action creator
-export const signup = (payload: SignupPayload): SignupAction => ({
-  type: SIGNUP,
-  payload,
-});
+export const signup = (payload: SignupPayload): SignupAction => {
+  return {
+    type: SIGNUP,
+    payload,
+  };
+};
 
 export const signupSuccess = (): SignupSuccessAction => ({
   type: SIGNUP_SUCCESS,

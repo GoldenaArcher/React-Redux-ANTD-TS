@@ -8,11 +8,12 @@ import logger from "redux-logger";
 
 export const history = createHashHistory();
 
+// create the saga middleware
 const sagaMiddleware = createSagaMiddleware();
 
 const store = createStore(
   createRootReaducer(history),
-  applyMiddleware(routerMiddleware(history), sagaMiddleware, logger)
+  applyMiddleware(routerMiddleware(history), logger, sagaMiddleware)
 );
 
 sagaMiddleware.run(rootSaga);
