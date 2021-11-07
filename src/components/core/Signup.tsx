@@ -2,7 +2,11 @@ import { Button, Form, Input, Result } from "antd";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { signup, SignupPayload } from "../../store/actions/auth.actions";
+import {
+  resetSignup,
+  signup,
+  SignupPayload,
+} from "../../store/actions/auth.actions";
 import { AppState } from "../../store/reducers";
 import { AuthState } from "../../store/reducers/auth.reducer";
 import Layout from "./Layout";
@@ -29,6 +33,7 @@ const Signup = () => {
     if (auth.signup.loaded && auth.signup.success) {
       return (
         <Result
+          key="signup-success"
           status="success"
           title="注册成功"
           extra={[
@@ -46,6 +51,7 @@ const Signup = () => {
     if (auth.signup.loaded && !auth.signup.success) {
       return (
         <Result
+          key="signup-fail"
           status="warning"
           title="注册失败"
           subTitle={auth.signup.message}
@@ -57,7 +63,9 @@ const Signup = () => {
   // 4. 离开页面之前，重置状态
   useEffect(() => {
     // 组件卸载时调用
-    return () => {};
+    return () => {
+      dispatch(resetSignup());
+    };
   }, []);
 
   const signupForm = () => (
