@@ -27,7 +27,7 @@ const AdminDashboard = () => {
         </Menu.Item>
         <Menu.Item key="create-product">
           <UserOutlined />
-          <Link to="">添加产品</Link>
+          <Link to="/create/product">添加产品</Link>
         </Menu.Item>
         <Menu.Item key="order-list">
           <OrderedListOutlined />
