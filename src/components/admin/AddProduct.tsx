@@ -19,7 +19,7 @@ const AddProduct = () => {
     (state) => state.category
   );
 
-  const { user, token } = isAuth() as Jwt;
+  const { token } = isAuth() as Jwt;
 
   const [file, setFile] = useState<RcFile>();
 
@@ -29,7 +29,7 @@ const AddProduct = () => {
 
   const addProductForm = () => {
     const props = {
-      accept: "image/*", 
+      accept: "image/*",
       beforeUpload: function (file: RcFile) {
         setFile(file);
         return false;

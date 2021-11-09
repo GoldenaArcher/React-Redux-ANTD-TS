@@ -21,7 +21,7 @@ const AddCategory = () => {
           { headers: { Authorization: `Bearer ${token}` } }
         );
         message.success(`[${response.data.name}] 分类添加成功`);
-      } catch (error: any) {
+      } catch (error) {
         message.error(error.response.data.error);
       }
     }
