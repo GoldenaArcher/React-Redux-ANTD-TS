@@ -5,13 +5,18 @@ import { getCategory } from "../../store/actions/category.action";
 import { searchProduct } from "../../store/actions/product.action";
 import { AppState } from "../../store/reducers";
 import { CategoryState } from "../../store/reducers/category.reducer";
-// import ProductItem from "./ProductItem";
+import { ProductState } from "../../store/reducers/product.reducer";
+import ProductItem from "./ProductItem";
 
 const Search = () => {
   const dispatch = useDispatch();
 
   const { category } = useSelector<AppState, CategoryState>(
     (state) => state.category
+  );
+
+  const { search } = useSelector<AppState, ProductState>(
+    (state) => state.product
   );
 
   useEffect(() => {
@@ -49,11 +54,13 @@ const Search = () => {
         </Input.Group>
       </Form>
       <Divider />
-      {/* <Row gutter={[16, 16]}>
-        <Col span="6">
-          <ProductItem />
-        </Col>
-      </Row> */}
+      <Row gutter={[16, 16]}>
+        {search.map((item) => (
+          <Col span="6">
+            <ProductItem product={item} />
+          </Col>
+        ))}
+      </Row>
     </>
   );
 };
