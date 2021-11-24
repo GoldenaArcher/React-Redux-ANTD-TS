@@ -2,6 +2,7 @@ import {
   GET_PRODUCT,
   GET_PRODUCT_SUCCESS,
   ProductUnionType,
+  SEARCH_PRODUCT_SUCCESS,
 } from "../actions/product.action";
 import { Product } from "../models/product";
 
@@ -16,6 +17,7 @@ export interface ProductState {
     success: boolean;
     products: Product[];
   };
+  search: Product[];
 }
 
 const initialState: ProductState = {
@@ -29,6 +31,7 @@ const initialState: ProductState = {
     success: false,
     products: [],
   },
+  search: [],
 };
 
 export default function productReducer(
@@ -40,7 +43,7 @@ export default function productReducer(
       return {
         ...state,
         [action.sortBy]: {
-          ...state[action.sortBy === 'createdAt' ? 'createdAt' : 'sold'],
+          ...state[action.sortBy === "createdAt" ? "createdAt" : "sold"],
           loaded: false,
           success: false,
         },
@@ -53,6 +56,11 @@ export default function productReducer(
           success: true,
           products: action.payload,
         },
+      };
+    case SEARCH_PRODUCT_SUCCESS:
+      return {
+        ...state,
+        search: action.products,
       };
     default:
       return state;

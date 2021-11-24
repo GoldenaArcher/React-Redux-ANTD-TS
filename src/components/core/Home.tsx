@@ -24,11 +24,11 @@ const Home = () => {
 
   return (
     <Layout title="商城首页" subTitle={""}>
-      {/* <Search /> */}
+      <Search />
       <Title level={5}>最新上架</Title>
       <Row gutter={[16, 16]}>
         {createdAt.products.map((item) => (
-          <Col span="6">
+          <Col span="6" key={item._id}>
             <ProductItem product={item} />
           </Col>
         ))}
@@ -36,7 +36,7 @@ const Home = () => {
       <Title level={5}>最受欢迎</Title>
       <Row gutter={[16, 16]}>
         {sold.products.map((item) => (
-          <Col span="6">
+          <Col span="6" key={item._id}>
             <ProductItem product={item} />
           </Col>
         ))}
