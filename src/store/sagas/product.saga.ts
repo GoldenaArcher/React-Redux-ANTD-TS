@@ -4,7 +4,7 @@ import {
   getProductSuccess,
   GET_PRODUCT,
 } from "../actions/product.action";
-import axios, { AxiosResponse } from "axios";
+import axios from "axios";
 import { API } from "../../config";
 import { Product } from "../models/product";
 

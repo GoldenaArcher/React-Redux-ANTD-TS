@@ -1,13 +1,22 @@
 import { Button, Card, Col, Row } from "antd";
 import Paragraph from "antd/lib/typography/Paragraph";
 import Title from "antd/lib/typography/Title";
-import React from "react";
+import React, { FC } from "react";
 import { Link } from "react-router-dom";
+import { Product } from "../../store/models/product";
+import { Image } from "antd";
+import { API } from "../../config";
 
-const ProductItem = () => {
+interface Props {
+  product: Product;
+}
+
+const ProductItem: FC<Props> = ({ product }) => {
   return (
     <Card
-      cover={<img src="" alt="" />}
+      cover={
+        <Image src={`${API}/product/photo/${product._id}`} alt={product.name} />
+      }
       actions={[
         <Button>
           <Link to="">查看详情</Link>
@@ -17,18 +26,18 @@ const ProductItem = () => {
         </Button>,
       ]}
     >
-      <Title level={5}>ceshi</Title>
-      <Paragraph ellipsis={{ rows: 2 }}>ceshi2</Paragraph>
+      <Title level={5}>{product.name}</Title>
+      <Paragraph ellipsis={{ rows: 2 }}>{product.description}</Paragraph>
       <Row>
-        <Col span="12">销量</Col>
+        <Col span="12">销量: {product.sold}</Col>
         <Col span="12" style={{ textAlign: "right" }}>
-          价格
+          价格: {product.price}
         </Col>
       </Row>
       <Row>
-        <Col span="12">上架时间</Col>
+        <Col span="12">上架时间: {product.createdAt}</Col>
         <Col span="12" style={{ textAlign: "right" }}>
-          所属分类
+          所属分类: {product.category.name}
         </Col>
       </Row>
     </Card>

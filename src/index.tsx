@@ -5,6 +5,7 @@ import { API } from "./config";
 import Routes from "./Routes";
 import store, { history } from "./store";
 import "antd/dist/antd.css";
+import './style.css'
 
 console.log(API);
 

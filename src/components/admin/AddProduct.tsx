@@ -19,7 +19,10 @@ const AddProduct = () => {
     (state) => state.category
   );
 
-  const { token } = isAuth() as Jwt;
+  const {
+    token,
+    user: { _id },
+  } = isAuth() as Jwt;
 
   const [file, setFile] = useState<RcFile>();
 
@@ -46,7 +49,7 @@ const AddProduct = () => {
       }
 
       axios
-        .post(`${API}/product/create/:userId`, formData, {
+        .post(`${API}/product/create/${_id}`, formData, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
