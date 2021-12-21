@@ -86,7 +86,10 @@ export default function productReducer(
         filter: {
           loaded: false,
           success: false,
-          result: [],
+          result: {
+            size: 0,
+            data: [],
+          },
         },
       };
     case FILTER_PRODUCT_SUCCESS:
