@@ -1,4 +1,4 @@
-import { Col, Row, Space } from "antd";
+import { Button, Col, Empty, Row, Space } from "antd";
 import React, { useEffect, useState } from "react";
 import Layout from "./Layout";
 import Checkbox from "./Checkbox";
@@ -17,16 +17,22 @@ const Shop = () => {
     price: number[];
   }>({ category: [], price: [] });
 
+  const [skip, setSkip] = useState(0);
+
   const product = useSelector<AppState, ProductState>((state) => state.product);
+
+  useEffect(() => {
+    setSkip(0);
+  }, [myFilters]);
 
   useEffect(() => {
     dispatch(
       filterProduct({
         filters: myFilters,
-        skip: 0,
+        skip: skip,
       })
     );
-  }, [myFilters]);
+  }, [myFilters, skip]);
 
   const filterDOM = () => (
     <Space size="middle" direction="vertical">
@@ -53,11 +59,33 @@ const Shop = () => {
     </Row>
   );
 
+  const loadMore = () => {
+    setSkip(skip + 4);
+  };
+
+  const loadMoreButton = () => {
+    return (
+      <Row>
+        {product.filter.result.size >= 4 && (
+          <Button onClick={loadMore}>加载更多</Button>
+        )}
+      </Row>
+    );
+  };
+
+  const noData = () => {
+    return <Row>{product.filter.result.size === 0 && <Empty />}</Row>;
+  };
+
   return (
     <Layout title="商城页面" subTitle={""}>
       <Row>
         <Col span="4">{filterDOM()}</Col>
-        <Col span="20">{productDom()}</Col>
+        <Col span="20">
+          {productDom()}
+          {loadMoreButton()}
+          {noData()}
+        </Col>
       </Row>
     </Layout>
   );

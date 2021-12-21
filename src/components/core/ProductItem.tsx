@@ -20,7 +20,7 @@ const ProductItem: FC<Props> = ({ product }) => {
       }
       actions={[
         <Button>
-          <Link to="">查看详情</Link>
+          <Link to={`/product/${product._id}`}>查看详情</Link>
         </Button>,
         <Button>
           <Link to="">加入购物车</Link>
