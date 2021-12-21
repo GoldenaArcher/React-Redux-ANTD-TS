@@ -1,13 +1,26 @@
 import { Col, Row, Space } from "antd";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Layout from "./Layout";
 import Checkbox from "./Checkbox";
 import Radiobox from "./Radiobox";
 
 const Shop = () => {
+  const [myFilters, setMyFilters] = useState<{
+    category: string[];
+    price: number[];
+  }>({ category: [], price: [] });
+
+  useEffect(() => {
+    console.log(myFilters);
+  }, [myFilters]);
+
   const filterDOM = () => (
-    <Space size="middle" direction='vertical'>
-      <Checkbox />
+    <Space size="middle" direction="vertical">
+      <Checkbox
+        handleFilter={(filters: string[]) => {
+          setMyFilters({ ...myFilters, category: filters });
+        }}
+      />
       <Radiobox />
     </Space>
   );
