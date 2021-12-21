@@ -1,5 +1,8 @@
 import { put, takeEvery } from "redux-saga/effects";
 import {
+  FilterProductAction,
+  filterProductSuccess,
+  FILTER_PRODUCT,
   GetProductAction,
   getProductSuccess,
   GET_PRODUCT,
@@ -32,7 +35,13 @@ function* handleSearchProduct({
   yield put(searchProductSuccess(response.data));
 }
 
+function* handleFilterProduct(action: FilterProductAction): any {
+  let response = yield axios.post(`${API}/products/filter`, action.payload);
+  yield put(filterProductSuccess(response.data, action.payload.skip as number));
+}
+
 export default function* productSaga() {
   yield takeEvery(GET_PRODUCT, handleGetProduct);
   yield takeEvery(SEARCH_PRODUCT, handleSearchProduct);
+  yield takeEvery(FILTER_PRODUCT, handleFilterProduct);
 }

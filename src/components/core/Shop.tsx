@@ -3,8 +3,12 @@ import React, { useEffect, useState } from "react";
 import Layout from "./Layout";
 import Checkbox from "./Checkbox";
 import Radiobox from "./Radiobox";
+import { useDispatch } from "react-redux";
+import { filterProduct } from "../../store/actions/product.action";
 
 const Shop = () => {
+  const dispatch = useDispatch();
+
   const [myFilters, setMyFilters] = useState<{
     category: string[];
     price: number[];
@@ -12,6 +16,12 @@ const Shop = () => {
 
   useEffect(() => {
     console.log(myFilters);
+    dispatch(
+      filterProduct({
+        filter: myFilters,
+        skip: 0,
+      })
+    );
   }, [myFilters]);
 
   const filterDOM = () => (
