@@ -21,7 +21,11 @@ const Shop = () => {
           setMyFilters({ ...myFilters, category: filters });
         }}
       />
-      <Radiobox />
+      <Radiobox
+        handleFilter={(filters: number[]) => {
+          setMyFilters({ ...myFilters, price: filters });
+        }}
+      />
     </Space>
   );
 

@@ -13,4 +13,8 @@ export interface Product {
   createdAt: string;
 }
 
-export interface Price {}
+export interface Price {
+  id: number;
+  name: string;
+  array: [number?, number?];
+}
