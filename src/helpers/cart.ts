@@ -46,3 +46,44 @@ export const getCart = () => {
 
   return [];
 };
+
+/**
+ * 更改购物车中商品的数量
+ */
+export const updateItem = (productId: string, count: number) => {
+  let cart: CartItem[] = [];
+
+  if (typeof window !== undefined) {
+    const storedCart = localStorage.getItem("cart");
+    if (storedCart) {
+      cart = JSON.parse(storedCart);
+    }
+    cart.forEach((item, index) => {
+      if (item._id === productId) {
+        cart[index].count = count;
+      }
+    });
+  }
+
+  localStorage.setItem("cart", JSON.stringify(cart));
+  return cart;
+};
+
+/**
+ * 删除购物车中的商品
+ */
+
+export const deleteIten = (productId: string) => {
+  let cart: CartItem[] = [];
+
+  if (typeof window !== undefined) {
+    const storedCart = localStorage.getItem("cart");
+    if (storedCart) {
+      cart = JSON.parse(storedCart);
+    }
+    cart = cart.filter((item) => item._id !== productId);
+  }
+
+  localStorage.setItem("cart", JSON.stringify(cart));
+  return cart;
+};

@@ -26,7 +26,7 @@ const Cart = () => {
         </thead>
         <tbody className="ant-table-tbody">
           {cart.map((item) => (
-            <CartItemFC product={item} />
+            <CartItemFC setCart={setCart} product={item} />
           ))}
         </tbody>
       </table>
