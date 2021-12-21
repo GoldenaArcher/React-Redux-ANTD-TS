@@ -14,7 +14,7 @@ export const addItem = (item: Product, next: () => void) => {
   if (typeof window !== undefined) {
     const storedCart = localStorage.getItem("cart");
     if (storedCart) {
-      JSON.parse(storedCart);
+      cart = JSON.parse(storedCart);
     }
 
     cart.push({
@@ -30,4 +30,19 @@ export const addItem = (item: Product, next: () => void) => {
   localStorage.setItem("cart", JSON.stringify(cart));
 
   next();
+};
+
+/**
+ * 获取本地购物车数据
+ */
+
+export const getCart = () => {
+  if (typeof window !== undefined) {
+    const storedCart = localStorage.getItem("cart");
+    if (storedCart) {
+      return JSON.parse(storedCart) as CartItem[];
+    }
+  }
+
+  return [];
 };
