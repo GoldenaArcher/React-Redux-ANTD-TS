@@ -13,3 +13,7 @@ A project using tech stack listed below:
 
 - Ant Design (UI Library)
 - TypeScript
+
+---
+
+Completed on Dec 21, 2021.
