@@ -1,4 +1,4 @@
-import { Divider, Typography } from "antd";
+import { Divider, Select, Typography } from "antd";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { API } from "../../config";
@@ -15,17 +15,17 @@ const Orders = () => {
 
   const { token, user } = isAuth() as Jwt;
 
+  async function getOrders() {
+    let response = await axios.get(`${API}/order/list/${user._id}`, {
+      headers: {
+        Authorization: `bearer ${token}`,
+      },
+    });
+
+    setOrders(response.data);
+  }
+
   useEffect(() => {
-    async function getOrders() {
-      let response = await axios.get(`${API}/order/list/${user._id}`, {
-        headers: {
-          Authorization: `bearer ${token}`,
-        },
-      });
-
-      setOrders(response.data);
-    }
-
     getOrders();
   }, []);
 
@@ -38,18 +38,37 @@ const Orders = () => {
   };
 
   const showStatus = (status: string) => {
-    switch (status.toLowerCase()) {
-      case "unpaid":
+    switch (status) {
+      case "Unpaid":
         return "未付款";
-      case "paid":
+      case "Paid":
         return "已付款";
-      case "shipped":
+      case "Shipped":
         return "已发货";
-      case "completed":
+      case "Completed":
         return "已完成";
-      case "cancelled":
+      case "Cancelled":
         return "已取消";
     }
+  };
+
+  const handleChange = (orderId: string) => (status: string) => {
+    axios
+      .put(
+        `${API}/order/status/${user._id}`,
+        {
+          orderId,
+          status,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
+      .then(() => {
+        getOrders();
+      });
   };
 
   return (
@@ -70,7 +89,19 @@ const Orders = () => {
             </thead>
             <tbody className="ant-table-tbody">
               <tr className="ant-table-row">
-                <td className="ant-table-cell">{showStatus(order.status)}</td>
+                <td className="ant-table-cell">
+                  {showStatus(order.status)}
+                  <Select
+                    defaultValue={order.status}
+                    onChange={handleChange(order._id)}
+                  >
+                    <Select.Option value="Unpaid">未付款</Select.Option>
+                    <Select.Option value="Paid">已付款</Select.Option>
+                    <Select.Option value="Shipped">已发货</Select.Option>
+                    <Select.Option value="Completed">已完成</Select.Option>
+                    <Select.Option value="Cancelled">已取消</Select.Option>
+                  </Select>
+                </td>
                 <td className="ant-table-cell">{order.trade_no}</td>
                 <td className="ant-table-cell">{order.amount}</td>
                 <td className="ant-table-cell">
