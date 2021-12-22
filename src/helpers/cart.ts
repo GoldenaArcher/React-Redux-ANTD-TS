@@ -87,3 +87,19 @@ export const deleteIten = (productId: string) => {
   localStorage.setItem("cart", JSON.stringify(cart));
   return cart;
 };
+
+/**
+ * 获取商品数量
+ */
+export const itemCount = () => {
+  let cart: CartItem[] = [];
+
+  if (typeof window !== undefined) {
+    const storedCart = localStorage.getItem("cart");
+    if (storedCart) {     
+      return JSON.parse(storedCart).length;
+    }
+  }
+
+  return 0;
+};

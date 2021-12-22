@@ -5,14 +5,17 @@ import { API } from "./config";
 import Routes from "./Routes";
 import store, { history } from "./store";
 import "antd/dist/antd.css";
-import './style.css'
+import "./style.css";
+import AnotherStore from "./anotherStore";
 
 console.log(API);
 
 ReactDOM.render(
   <Provider store={store}>
     <ConnectedRouter history={history}>
-      <Routes />
+      <AnotherStore>
+        <Routes />
+      </AnotherStore>
     </ConnectedRouter>
   </Provider>,
   document.getElementById("root")
